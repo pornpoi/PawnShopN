@@ -363,7 +363,7 @@
                             "<td style='text-align:center'>" + data[i].TIME + "</td>" +
                             "<td style='text-align:center'>" + data[i].BranchName + "</td>" +
                             "<td style='text-align:center'><input type='button' value='จัดกรรมการ' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCom('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
-                            + "<input type='button' value='จัดกรรมการควบคุม' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCon('" + data[i].EventID + "')\"/>"
+                            + "<input type='button' value='จัดกรรมการ' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageComControl('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
                             + "<input type='button' value='จัดพนักงานบัญชี' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageACc('" + data[i].EventID + "')\"/>"
                             + "<input type='button' value='จัดเจ้าหน้าที่เสนอทรัพย์' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageEProduct('" + data[i].EventID + "')\"/>"
                             + "<input type='button' value='จัดโฆษก' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageSpokesman('" + data[i].EventID + "')\"/></td>"
@@ -383,6 +383,11 @@
     function ManageCom(EventID, EventNo, DateEventStart, GroupName) {
         //$("#Content").load("AuctionArea/Committtee.aspx?EventID=" + EventID);
         window.open("AuctionArea/Committtee.aspx?EventID=" + EventID + "&EventNo=" + EventNo + "&DateEventStart=" + DateEventStart + "&GroupName=" + GroupName, '_blank', 'toolbar=0,location=0,menubar=0');
+        //Console.log(EventID);
+    }
+    function ManageComControl(EventID, EventNo, DateEventStart, GroupName) {
+        //$("#Content").load("AuctionArea/Committtee.aspx?EventID=" + EventID);
+        window.open("AuctionArea/CommitteeController.aspx?EventID=" + EventID + "&EventNo=" + EventNo + "&DateEventStart=" + DateEventStart + "&GroupName=" + GroupName, '_blank', 'toolbar=0,location=0,menubar=0');
         //Console.log(EventID);
     }
 

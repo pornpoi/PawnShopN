@@ -1,0 +1,1226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetProvinces">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProvincesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProvincesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchProvinces">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="keywords" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SearchProvincesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SearchProvincesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistricts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="province_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDistrictsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetDistrictsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubDistricts">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="district_id" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSubDistrictsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSubDistrictsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrefix">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPrefixResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPrefixResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBranches">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBranchesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetBranchesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCardType">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCardTypeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCardTypeResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOccupations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOccupationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOccupationsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNations">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetNationsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetNationsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountries">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetCountriesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetCountriesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPromotions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Age" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="OccupationId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Amount" type="s:decimal" />
+            <s:element minOccurs="1" maxOccurs="1" name="Skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPromotionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPromotionsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductTypes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductTypesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductTypesResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductTypesRef">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProductTypeId" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetProductTypesRefResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetProductTypesRefResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionObjective">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="TransactionType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Skip" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="Take" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTransactionObjectiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetTransactionObjectiveResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetProvincesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProvinces" />
+  </wsdl:message>
+  <wsdl:message name="GetProvincesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProvincesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesSoapIn">
+    <wsdl:part name="parameters" element="tns:SearchProvinces" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesSoapOut">
+    <wsdl:part name="parameters" element="tns:SearchProvincesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetDistricts" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetDistrictsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSubDistricts" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSubDistrictsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPrefix" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPrefixResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBranches" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBranchesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCardType" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCardTypeResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOccupations" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOccupationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetNations" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetNationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetCountries" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetCountriesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPromotions" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPromotionsResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductTypes" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductTypesResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefSoapIn">
+    <wsdl:part name="parameters" element="tns:GetProductTypesRef" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefSoapOut">
+    <wsdl:part name="parameters" element="tns:GetProductTypesRefResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveSoapIn">
+    <wsdl:part name="parameters" element="tns:GetTransactionObjective" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveSoapOut">
+    <wsdl:part name="parameters" element="tns:GetTransactionObjectiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetProvincesHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProvincesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesHttpGetIn">
+    <wsdl:part name="keywords" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsHttpGetIn">
+    <wsdl:part name="province_id" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsHttpGetIn">
+    <wsdl:part name="district_id" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesHttpGetIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsHttpGetIn">
+    <wsdl:part name="Age" type="s:string" />
+    <wsdl:part name="OccupationId" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesHttpGetIn">
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefHttpGetIn">
+    <wsdl:part name="ProductTypeId" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveHttpGetIn">
+    <wsdl:part name="TransactionType" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProvincesHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProvincesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesHttpPostIn">
+    <wsdl:part name="keywords" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="SearchProvincesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsHttpPostIn">
+    <wsdl:part name="province_id" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetDistrictsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsHttpPostIn">
+    <wsdl:part name="district_id" type="s:string" />
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSubDistrictsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrefixHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetBranchesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCardTypeHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOccupationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetNationsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesHttpPostIn">
+    <wsdl:part name="skip" type="s:string" />
+    <wsdl:part name="take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetCountriesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsHttpPostIn">
+    <wsdl:part name="Age" type="s:string" />
+    <wsdl:part name="OccupationId" type="s:string" />
+    <wsdl:part name="Amount" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPromotionsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesHttpPostIn">
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefHttpPostIn">
+    <wsdl:part name="ProductTypeId" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetProductTypesRefHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveHttpPostIn">
+    <wsdl:part name="TransactionType" type="s:string" />
+    <wsdl:part name="Skip" type="s:string" />
+    <wsdl:part name="Take" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetTransactionObjectiveHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="ListOfValuesSoap">
+    <wsdl:operation name="GetProvinces">
+      <wsdl:input message="tns:GetProvincesSoapIn" />
+      <wsdl:output message="tns:GetProvincesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <wsdl:input message="tns:SearchProvincesSoapIn" />
+      <wsdl:output message="tns:SearchProvincesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <wsdl:input message="tns:GetDistrictsSoapIn" />
+      <wsdl:output message="tns:GetDistrictsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <wsdl:input message="tns:GetSubDistrictsSoapIn" />
+      <wsdl:output message="tns:GetSubDistrictsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <wsdl:input message="tns:GetPrefixSoapIn" />
+      <wsdl:output message="tns:GetPrefixSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <wsdl:input message="tns:GetBranchesSoapIn" />
+      <wsdl:output message="tns:GetBranchesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <wsdl:input message="tns:GetCardTypeSoapIn" />
+      <wsdl:output message="tns:GetCardTypeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <wsdl:input message="tns:GetOccupationsSoapIn" />
+      <wsdl:output message="tns:GetOccupationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <wsdl:input message="tns:GetNationsSoapIn" />
+      <wsdl:output message="tns:GetNationsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:input message="tns:GetCountriesSoapIn" />
+      <wsdl:output message="tns:GetCountriesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <wsdl:input message="tns:GetPromotionsSoapIn" />
+      <wsdl:output message="tns:GetPromotionsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <wsdl:input message="tns:GetProductTypesSoapIn" />
+      <wsdl:output message="tns:GetProductTypesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <wsdl:input message="tns:GetProductTypesRefSoapIn" />
+      <wsdl:output message="tns:GetProductTypesRefSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <wsdl:input message="tns:GetTransactionObjectiveSoapIn" />
+      <wsdl:output message="tns:GetTransactionObjectiveSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ListOfValuesHttpGet">
+    <wsdl:operation name="GetProvinces">
+      <wsdl:input message="tns:GetProvincesHttpGetIn" />
+      <wsdl:output message="tns:GetProvincesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <wsdl:input message="tns:SearchProvincesHttpGetIn" />
+      <wsdl:output message="tns:SearchProvincesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <wsdl:input message="tns:GetDistrictsHttpGetIn" />
+      <wsdl:output message="tns:GetDistrictsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <wsdl:input message="tns:GetSubDistrictsHttpGetIn" />
+      <wsdl:output message="tns:GetSubDistrictsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <wsdl:input message="tns:GetPrefixHttpGetIn" />
+      <wsdl:output message="tns:GetPrefixHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <wsdl:input message="tns:GetBranchesHttpGetIn" />
+      <wsdl:output message="tns:GetBranchesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <wsdl:input message="tns:GetCardTypeHttpGetIn" />
+      <wsdl:output message="tns:GetCardTypeHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <wsdl:input message="tns:GetOccupationsHttpGetIn" />
+      <wsdl:output message="tns:GetOccupationsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <wsdl:input message="tns:GetNationsHttpGetIn" />
+      <wsdl:output message="tns:GetNationsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:input message="tns:GetCountriesHttpGetIn" />
+      <wsdl:output message="tns:GetCountriesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <wsdl:input message="tns:GetPromotionsHttpGetIn" />
+      <wsdl:output message="tns:GetPromotionsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <wsdl:input message="tns:GetProductTypesHttpGetIn" />
+      <wsdl:output message="tns:GetProductTypesHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <wsdl:input message="tns:GetProductTypesRefHttpGetIn" />
+      <wsdl:output message="tns:GetProductTypesRefHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <wsdl:input message="tns:GetTransactionObjectiveHttpGetIn" />
+      <wsdl:output message="tns:GetTransactionObjectiveHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="ListOfValuesHttpPost">
+    <wsdl:operation name="GetProvinces">
+      <wsdl:input message="tns:GetProvincesHttpPostIn" />
+      <wsdl:output message="tns:GetProvincesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <wsdl:input message="tns:SearchProvincesHttpPostIn" />
+      <wsdl:output message="tns:SearchProvincesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <wsdl:input message="tns:GetDistrictsHttpPostIn" />
+      <wsdl:output message="tns:GetDistrictsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <wsdl:input message="tns:GetSubDistrictsHttpPostIn" />
+      <wsdl:output message="tns:GetSubDistrictsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <wsdl:input message="tns:GetPrefixHttpPostIn" />
+      <wsdl:output message="tns:GetPrefixHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <wsdl:input message="tns:GetBranchesHttpPostIn" />
+      <wsdl:output message="tns:GetBranchesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <wsdl:input message="tns:GetCardTypeHttpPostIn" />
+      <wsdl:output message="tns:GetCardTypeHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <wsdl:input message="tns:GetOccupationsHttpPostIn" />
+      <wsdl:output message="tns:GetOccupationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <wsdl:input message="tns:GetNationsHttpPostIn" />
+      <wsdl:output message="tns:GetNationsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <wsdl:input message="tns:GetCountriesHttpPostIn" />
+      <wsdl:output message="tns:GetCountriesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <wsdl:input message="tns:GetPromotionsHttpPostIn" />
+      <wsdl:output message="tns:GetPromotionsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <wsdl:input message="tns:GetProductTypesHttpPostIn" />
+      <wsdl:output message="tns:GetProductTypesHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <wsdl:input message="tns:GetProductTypesRefHttpPostIn" />
+      <wsdl:output message="tns:GetProductTypesRefHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <wsdl:input message="tns:GetTransactionObjectiveHttpPostIn" />
+      <wsdl:output message="tns:GetTransactionObjectiveHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ListOfValuesSoap" type="tns:ListOfValuesSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProvinces">
+      <soap:operation soapAction="http://tempuri.org/GetProvinces" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <soap:operation soapAction="http://tempuri.org/SearchProvinces" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <soap:operation soapAction="http://tempuri.org/GetDistricts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <soap:operation soapAction="http://tempuri.org/GetSubDistricts" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <soap:operation soapAction="http://tempuri.org/GetPrefix" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <soap:operation soapAction="http://tempuri.org/GetBranches" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <soap:operation soapAction="http://tempuri.org/GetCardType" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <soap:operation soapAction="http://tempuri.org/GetOccupations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <soap:operation soapAction="http://tempuri.org/GetNations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap:operation soapAction="http://tempuri.org/GetCountries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <soap:operation soapAction="http://tempuri.org/GetPromotions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <soap:operation soapAction="http://tempuri.org/GetProductTypes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <soap:operation soapAction="http://tempuri.org/GetProductTypesRef" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <soap:operation soapAction="http://tempuri.org/GetTransactionObjective" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListOfValuesSoap12" type="tns:ListOfValuesSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetProvinces">
+      <soap12:operation soapAction="http://tempuri.org/GetProvinces" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <soap12:operation soapAction="http://tempuri.org/SearchProvinces" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <soap12:operation soapAction="http://tempuri.org/GetDistricts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <soap12:operation soapAction="http://tempuri.org/GetSubDistricts" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <soap12:operation soapAction="http://tempuri.org/GetPrefix" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <soap12:operation soapAction="http://tempuri.org/GetBranches" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <soap12:operation soapAction="http://tempuri.org/GetCardType" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <soap12:operation soapAction="http://tempuri.org/GetOccupations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <soap12:operation soapAction="http://tempuri.org/GetNations" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <soap12:operation soapAction="http://tempuri.org/GetCountries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <soap12:operation soapAction="http://tempuri.org/GetPromotions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <soap12:operation soapAction="http://tempuri.org/GetProductTypes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <soap12:operation soapAction="http://tempuri.org/GetProductTypesRef" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <soap12:operation soapAction="http://tempuri.org/GetTransactionObjective" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListOfValuesHttpGet" type="tns:ListOfValuesHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetProvinces">
+      <http:operation location="/GetProvinces" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <http:operation location="/SearchProvinces" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <http:operation location="/GetDistricts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <http:operation location="/GetSubDistricts" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <http:operation location="/GetPrefix" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <http:operation location="/GetBranches" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <http:operation location="/GetCardType" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <http:operation location="/GetOccupations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <http:operation location="/GetNations" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <http:operation location="/GetCountries" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <http:operation location="/GetPromotions" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <http:operation location="/GetProductTypes" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <http:operation location="/GetProductTypesRef" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <http:operation location="/GetTransactionObjective" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListOfValuesHttpPost" type="tns:ListOfValuesHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetProvinces">
+      <http:operation location="/GetProvinces" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SearchProvinces">
+      <http:operation location="/SearchProvinces" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDistricts">
+      <http:operation location="/GetDistricts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSubDistricts">
+      <http:operation location="/GetSubDistricts" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrefix">
+      <http:operation location="/GetPrefix" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBranches">
+      <http:operation location="/GetBranches" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCardType">
+      <http:operation location="/GetCardType" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOccupations">
+      <http:operation location="/GetOccupations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetNations">
+      <http:operation location="/GetNations" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCountries">
+      <http:operation location="/GetCountries" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPromotions">
+      <http:operation location="/GetPromotions" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypes">
+      <http:operation location="/GetProductTypes" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetProductTypesRef">
+      <http:operation location="/GetProductTypesRef" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetTransactionObjective">
+      <http:operation location="/GetTransactionObjective" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ListOfValues">
+    <wsdl:port name="ListOfValuesSoap" binding="tns:ListOfValuesSoap">
+      <soap:address location="http://180.180.247.22/WS/ListOfValues.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListOfValuesSoap12" binding="tns:ListOfValuesSoap12">
+      <soap12:address location="http://180.180.247.22/WS/ListOfValues.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListOfValuesHttpGet" binding="tns:ListOfValuesHttpGet">
+      <http:address location="http://180.180.247.22/WS/ListOfValues.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListOfValuesHttpPost" binding="tns:ListOfValuesHttpPost">
+      <http:address location="http://180.180.247.22/WS/ListOfValues.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

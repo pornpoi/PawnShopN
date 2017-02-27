@@ -1,0 +1,18 @@
+body{
+    background: #cccccc;
+    font-family: Tahoma;
+}
+H1{
+    color:rgba(255,0,0,1);
+    text-shadow:10px 5px 5px #00ff00;
+}
+#banner{
+    border: #843534 solid 2px;
+    border-radius: 15px; 
+}
+.thumnail{
+    border:white solid 5px;
+    border-radius: 20px;
+    transform: translate(50px,100px) rotate(-15deg) skew(10deg,10deg) scale(0.8,0.8);
+    
+}

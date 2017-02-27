@@ -24,20 +24,20 @@
 <body>
     <div class="container-fluid">
         <header class="page-header">
-            <h3><i class="fa fa-file-text-o " aria-hidden="true"></i>&nbsp;ข้อมูลคณะกรรมการประเมินทรัพย์หลุดจำนำ</h3>
+            <h3><i class="fa fa-file-text-o " aria-hidden="true"></i>&nbsp;ข้อมูลคณะกรรมการดำเนินการจำหน่ายทรัพย์หลุดจำนำและเจ้าหน้าที่เสนอทรัพย์หลุดจำนำ</h3>
         </header>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>ประกาศที่ : <mark><%=EventNo %></mark></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>วันที่ : <mark><%=DateEventStart %></mark></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>ประเภททรัพย์หลุดจำนำ : <mark><%=GroupName %></mark></h4>
             </div>
         </div>
@@ -68,26 +68,26 @@
                             </header>
                             <div id="committBlog">
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-2" for="email">ประธานกรรมการ:</label>
-                                    <div class="col-sm-10" id="drlBlg0">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">ประธานกรรมการ:</label>
+                                    <div class="col-sm-8 col-md-10" id="drlBlg0">
                                         <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
                                     </div>
                                 </div>
                                 <div class="form-group row ">
-                                    <label class="control-label col-sm-2" for="pwd">กรรมการคนที่ 1:</label>
-                                    <div class="col-sm-10" id="drlBlg1">
+                                    <label class="control-label col-sm-4 col-md-2" for="pwd">กรรมการคนที่ 1:</label>
+                                    <div class="col-sm-8 col-md-10" id="drlBlg1">
                                         <%--<input type="text" class="form-control" id="commit1" placeholder="กรรมการคนที่ 1">--%>
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-2" for="pwd">กรรมการคนที่ 2:</label>
-                                    <div class="col-sm-10" id="drlBlg2">
+                                    <label class="control-label col-sm-4 col-md-2" for="pwd">กรรมการคนที่ 2:</label>
+                                    <div class="col-sm-8 col-md-10" id="drlBlg2">
                                         <%--<input type="text" class="form-control" id="commit2" placeholder="กรรมการคนที่ 2">--%>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-4 col-sm-8  col-md-offset-2 col-md-10">
                                     <a href="#" class="btn btn-success" id="addComitt">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;เพิ่มกรรมการ</a>
                                     <a href="#" class="btn btn-danger" id="removeComitt">
@@ -100,20 +100,56 @@
                             </div>
                             <div id="branchBlg">
                                 <div class="form-group row">
-                                    <label class="control-label col-sm-2" for="email">สาขาที่ 1:</label>
-                                    <div class="col-sm-10" id="brhBlg0">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">สาขาที่ 1:</label>
+                                    <div class="col-sm-8 col-md-10" id="brhBlg0">
                                         <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                                <div class="col-sm-offset-4 col-sm-8 col-md-offset-2 col-md-10">
 
                                     <a href="#" class="btn btn-success" id="addBranch">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;เพิ่มสาขา</a>
                                     <a href="#" class="btn btn-danger" id="removeBranch">
                                         <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;ลดสาขา</a>
 
+                                </div>
+                            </div>
+                            <div class="page-header">
+                                <h4><i class="fa fa-home" aria-hidden="true"></i>&nbsp;โฆษก</h4>
+
+                            </div>
+                            <div id="AnnouncerBlg">
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">นักการเงินและบัญชี:</label>
+                                    <div class="col-sm-8  col-md-10" id="announcerBlg0">
+                                        <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">พนักงานรักษาของ: </label>
+                                    <div class="col-sm-8 col-md-10" id="announcerBlg1">
+                                        <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="page-header">
+                                <h4><i class="fa fa-home" aria-hidden="true"></i>&nbsp;เจ้าหน้าที่เสนอทรัพย์หลุดจำนำ</h4>
+
+                            </div>
+                            <div id="OfficerBlg">
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">เจ้าหน้าที่คนที่ 1:</label>
+                                    <div class="col-sm-8  col-md-10" id="officerBlg0">
+                                        <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label col-sm-4 col-md-2" for="email">เจ้าหน้าที่คนที่ 2: </label>
+                                    <div class="col-sm-8 col-md-10" id="officerBlg1">
+                                        <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
+                                    </div>
                                 </div>
                             </div>
                         </form>
@@ -131,10 +167,8 @@
 <script>
     var committNum = 2;
     var branchNum = 0;
-
     var v_rowId = -1;
     //รับค่าจากหน้าเต้ย
-    //var v_eventId = 1;
     var v_eventId = <%=eventId %> ;
     $(document).ready(function () {
         LoadDefault(v_eventId);
@@ -144,6 +178,12 @@
         }
         //Load dropdown สำหรับสาขา
         innerDrw(0, "branch", -1);
+        //Load dropdown สำหรับโฆษก
+        innerDrw(0, "announcer", -1);
+        innerDrw(1, "announcer", -1);
+        //Load dropdown สำหรับเจ้าหน้าที่เสนอทรัพย์หลุดจำนำ
+        innerDrw(0, "officer", -1);
+        innerDrw(1, "officer", -1);
 
         $("#GetRow").click(function () {
             alert(getMaxRowNum());
@@ -204,7 +244,7 @@
         $('#update').click(function () {
             //ลบข้อมูลเดิมออก
             $.ajax({
-                url: "./Committee_ajax.aspx",
+                url: "./CommitteeController_ajax.aspx",
                 data: "eventId=" + v_eventId + "&rowNum=" + v_rowId + "&type=deleteRow",
                 method: "POST",
                 success: function (data) {
@@ -252,7 +292,7 @@
 
     function LoadDefault(num) {
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "type=loadDefault" + "&eventId=" + num,
             method: "POST",
             async: false,
@@ -311,7 +351,7 @@
         var result = "";
         //$('#myModal').modal('show');
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "eventId=" + eventId + "&rowNum=" + rowId + "&type=editRowEmp",
             method: "POST",
             async: false,
@@ -344,7 +384,7 @@
         //$('#myModal').modal('show');
         var result = "";
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "eventId=" + eventId + "&rowNum=" + rowId + "&type=editRowBranch",
             method: "POST",
             async: false,
@@ -378,7 +418,7 @@
         //alert(rowId + "," + eventId);
         if (confirm('คุณต้องการลบข้อมูล') == true) {
             $.ajax({
-                url: "./Committee_ajax.aspx",
+                url: "./CommitteeController_ajax.aspx",
                 data: "eventId=" + eventId + "&rowNum=" + rowId + "&type=deleteRow",
                 method: "POST",
                 success: function (data) {
@@ -397,7 +437,7 @@
     //เก็บเพิ่มข้อมูลลง DB
     function addDataToDB(eventId, memberTypeId, userId, branchId, rowNum) {
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "eventId=" + eventId + "&memberTypeId=" + memberTypeId + "&userId=" + userId + "&branchId=" + branchId + "&rowNum=" + rowNum + "&type=addData",
             method: "POST",
             success: function (data) {
@@ -409,7 +449,7 @@
     function getMaxRowNum() {
         var result = "";
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "type=getRowNum",
             method: "POST",
             async: false,
@@ -424,19 +464,27 @@
     //สำหรับสร้าง dropdownList
     function innerDrw(num, type, Id) {
         $.ajax({
-            url: "./Committee_ajax.aspx",
+            url: "./CommitteeController_ajax.aspx",
             data: "num=" + num + "&type=" + type + "&Id=" + Id,
             method: "POST",
             beforeSend: function () {
                 if (type == "committ") {
                     $("#drlBlg" + num).html('<i class="fa fa-spinner fa-spin"></i>');
-                } else {
+                }else if(type == "announcer"){
+                    $('#announcerBlg' + num).html('<i class="fa fa-spinner fa-spin"></i>');
+                }else if(type == "officer"){
+                    $('#officerBlg' + num).html('<i class="fa fa-spinner fa-spin"></i>');
+                }else{
                     $("#brhBlg" + num).html('<i class="fa fa-spinner fa-spin"></i>');
                 }
             },
             success: function (data) {
                 if (type == "committ") {
                     $("#drlBlg" + num).html(data);
+                }else if(type == "announcer"){
+                    $('#announcerBlg' + num).html(data);
+                }else if(type == "officer"){
+                    $('#officerBlg' + num).html(data);
                 } else {
                     $("#brhBlg" + num).html(data);
                     //alert(data);

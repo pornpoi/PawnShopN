@@ -16,6 +16,12 @@ Partial Class AuctionArea_CommitteeController_ajax
         ElseIf (type = "branch") Then
             Dim drlNum As String = Request.Form("num")
             LoadBranch(drlNum, Request.Form("Id"))
+        ElseIf (type = "announcer") Then
+            Dim drlNum As String = Request.Form("num")
+            LoadAnnouncer(drlNum, Request.Form("Id"))
+        ElseIf (type = "officer") Then
+            Dim drlNum As String = Request.Form("num")
+            LoadOfficer(drlNum, Request.Form("Id"))
         ElseIf (type = "addData") Then
             AddCommittee(Request.Form("eventId"), Request.Form("memberTypeId"), Request.Form("userId"), Request.Form("branchId"), Request.Form("rowNum"))
         ElseIf (type = "getRowNum") Then
@@ -38,6 +44,31 @@ Partial Class AuctionArea_CommitteeController_ajax
         Dim result As String = ""
         result &= "<select id='commit" & num & "' class='form-control'>"
         result &= "<option value='-1'>--กรุณาเลือกกรรมการ--</option>"
+        For Each dr As DataRow In dt.Rows
+            result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
+        Next
+        result &= "</select>"
+        Response.Write(result)
+    End Sub
+
+    Sub LoadOfficer(ByVal num As String, Optional ByVal EmpId As String = "")
+        Dim dt As New DataTable
+        dt = getEmployeeddl()
+        Dim result As String = ""
+        result &= "<select id='officer" & num & "' class='form-control'>"
+        result &= "<option value='-1'>--กรุณาเลือกเจ้าหน้าที่--</option>"
+        For Each dr As DataRow In dt.Rows
+            result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
+        Next
+        result &= "</select>"
+        Response.Write(result)
+    End Sub
+    Sub LoadAnnouncer(ByVal num As String, Optional ByVal EmpId As String = "")
+        Dim dt As New DataTable
+        dt = getEmployeeddl()
+        Dim result As String = ""
+        result &= "<select id='announcer" & num & "' class='form-control'>"
+        result &= "<option value='-1'>--กรุณาเลือกโฆษก--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next

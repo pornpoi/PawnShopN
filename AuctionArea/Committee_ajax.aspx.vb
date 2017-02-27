@@ -334,6 +334,8 @@ Partial Class AdminConfig_Committee_ajax
         cmd.Parameters.Add(New OracleParameter("vUserId", OracleDbType.NVarchar2)).Value = vUserId
         cmd.Parameters.Add(New OracleParameter("vBranchId", OracleDbType.Int32)).Value = vBranchId
         cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = vRowNum
+        cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = "0"
+        cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = "0"
 
         Try
             cmd.ExecuteNonQuery()

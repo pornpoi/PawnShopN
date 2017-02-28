@@ -1,5 +1,4 @@
-﻿
-Partial Class AuctionArea_CommitteeController
+﻿Partial Class AuctionArea_CommitteeController
     Inherits System.Web.UI.Page
     Public Shared eventId As String = "1"
     Public Shared EventNo As String = ""

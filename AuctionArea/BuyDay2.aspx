@@ -362,11 +362,9 @@
                             "<td style='text-align:center'>" + data[i].Location + "</td>" +
                             "<td style='text-align:center'>" + data[i].TIME + "</td>" +
                             "<td style='text-align:center'>" + data[i].BranchName + "</td>" +
-                            "<td style='text-align:center'><input type='button' value='จัดกรรมการ' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCom('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
-                            + "<input type='button' value='จัดกรรมการ' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageComControl('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
-                            + "<input type='button' value='จัดพนักงานบัญชี' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageACc('" + data[i].EventID + "')\"/>"
-                            + "<input type='button' value='จัดเจ้าหน้าที่เสนอทรัพย์' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageEProduct('" + data[i].EventID + "')\"/>"
-                            + "<input type='button' value='จัดโฆษก' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageSpokesman('" + data[i].EventID + "')\"/></td>"
+                            "<td style='text-align:center'><input type='button' value='จัดกรรมการประเมินราคาทรัพย์หลุด' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCom('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
+                            + "<input type='button' value='จัดกรรมการควบคุมการจำหน่ายทรัพย์หลุด' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageComControl('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
+                            +"</td>"
                             + "<td style='text-align:center'><input type='button' value='แก้ไข' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"Btnupdate('" + data[i].EventID + "')\"/>"
                             + "<input type='button' value='ลบ' style='color:#ffffff' class='uk-button uk-width-1-1 uk-button-danger' onclick=\"Btncancel('" + data[i].EventID + "')\"/></td>" +
                         "</tr>"

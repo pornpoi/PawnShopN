@@ -16,8 +16,14 @@ Partial Class AuctionArea_CommitteeController_ajax
         ElseIf (type = "branch") Then
             Dim drlNum As String = Request.Form("num")
             LoadBranch(drlNum, Request.Form("Id"))
+        ElseIf (type = "announcer") Then
+            Dim drlNum As String = Request.Form("num")
+            LoadAnnouncer(drlNum, Request.Form("Id"))
+        ElseIf (type = "officer") Then
+            Dim drlNum As String = Request.Form("num")
+            LoadOfficer(drlNum, Request.Form("Id"))
         ElseIf (type = "addData") Then
-            AddCommittee(Request.Form("eventId"), Request.Form("memberTypeId"), Request.Form("userId"), Request.Form("branchId"), Request.Form("rowNum"))
+            AddCommittee(Request.Form("eventId"), Request.Form("memberTypeId"), Request.Form("userId"), Request.Form("branchId"), Request.Form("rowNum"), Request.Form("announcerId"), Request.Form("officerId"))
         ElseIf (type = "getRowNum") Then
             Response.Write(GetMaxCommitteeRowNumInt().ToString)
         ElseIf (type = "loadDefault") Then
@@ -38,6 +44,31 @@ Partial Class AuctionArea_CommitteeController_ajax
         Dim result As String = ""
         result &= "<select id='commit" & num & "' class='form-control'>"
         result &= "<option value='-1'>--กรุณาเลือกกรรมการ--</option>"
+        For Each dr As DataRow In dt.Rows
+            result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
+        Next
+        result &= "</select>"
+        Response.Write(result)
+    End Sub
+
+    Sub LoadOfficer(ByVal num As String, Optional ByVal EmpId As String = "")
+        Dim dt As New DataTable
+        dt = getEmployeeddl()
+        Dim result As String = ""
+        result &= "<select id='officer" & num & "' class='form-control'>"
+        result &= "<option value='-1'>--กรุณาเลือกเจ้าหน้าที่--</option>"
+        For Each dr As DataRow In dt.Rows
+            result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
+        Next
+        result &= "</select>"
+        Response.Write(result)
+    End Sub
+    Sub LoadAnnouncer(ByVal num As String, Optional ByVal EmpId As String = "")
+        Dim dt As New DataTable
+        dt = getEmployeeddl()
+        Dim result As String = ""
+        result &= "<select id='announcer" & num & "' class='form-control'>"
+        result &= "<option value='-1'>--กรุณาเลือกโฆษก--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next
@@ -97,17 +128,19 @@ Partial Class AuctionArea_CommitteeController_ajax
     End Sub
     Sub LoadAllData(ByVal num As String)
         Dim dt As New DataTable
+        Dim strAnnouncerSplit As Array
+        Dim strOfficerSplit As Array
         Dim result As String = "<table class='table table-striped table-bordered table-hover' border='1'>"
-        result &= "<thead><tr><th>สถานธนานุบาลกรุงเทพมหานคร</th><th>คณะกรรมการประเมินทรัพย์หลุดจำนำ</th><th>ตำแหน่ง</th><th>&nbsp;</th></tr></thead>"
-
+        result &= "<thead><tr><th rowspan='2' scope='col'>สถานธนานุบาลกรุงเทพมหานคร</th><th rowspan='2' scope='col'>คณะกรรมการประเมินทรัพย์หลุดจำนำ</th><th colspan='2' scope='col'>คณะกรรมการดำเนินการจำหน่ายทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>เจ้าหน้าที่เสนอทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>&nbsp;</th></tr>"
+        result &= "<tr><th>พนักงานสาขาตำแหน่ง</th><th>โฆษก</th></tr></thead>"
         dt = getCommitteeMemberByEventId(num)
-
         'ชุดข้อมูลของจำนวนแถวชุดข้อมูล
         Dim distDTRowNum = dt.AsEnumerable().Select(Function(row) New With {
                 Key .RowNum = row.Field(Of Decimal)("RowNum")
         }).Distinct()
 
         For Each row In distDTRowNum
+
             result &= "<tr>"
 
             Dim editBtn As String = "<a href='#' class='btn btn-primary btn-sm' onclick=""editRow(" & row.RowNum & "," & "'" & num & "')""><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;แก้ไข</a>"
@@ -139,8 +172,36 @@ Partial Class AuctionArea_CommitteeController_ajax
             result &= "</td>"
             'จบชุดข้อมูลของพนักงาน
 
+            'ข้อมูลโฆษก
+            Dim AnnounceGroup As String = ""
+            Dim distDTAnnouncer = dt.AsEnumerable().Select(Function(rowData) New With {
+                Key .RowNum = rowData.Field(Of Decimal)("RowNum"),
+                Key .AnnouncerId = rowData.Field(Of String)("AnnouncerId")
+            }).Distinct().Where(Function(rownum) rownum.RowNum = row.RowNum)
+
+            strAnnouncerSplit = Split(distDTAnnouncer(0).AnnouncerId.ToString(), "|")
+            For i = 0 To strAnnouncerSplit.Length - 1
+                Dim dataRow As DataRow = getEmployeeById(strAnnouncerSplit(i)).Rows(0)
+                AnnounceGroup &= dataRow.Item("FULLNAME").ToString() & "<br />"
+            Next
+            'จบชุดข้อมูลโฆษก
+            'ข้อมูลเจ้าหน้าที่เสนอทรัพย์หลุดจำนำ
+            Dim OfficerGroup As String = ""
+            Dim distDTOfficer = dt.AsEnumerable().Select(Function(rowData) New With {
+                Key .RowNum = rowData.Field(Of Decimal)("RowNum"),
+                Key .OfficerId = rowData.Field(Of String)("OfficerId")
+            }).Distinct().Where(Function(rownum) rownum.RowNum = row.RowNum)
+
+            strOfficerSplit = Split(distDTOfficer(0).OfficerId.ToString(), "|")
+            For i = 0 To strOfficerSplit.Length - 1
+                Dim dataRow As DataRow = getEmployeeById(strOfficerSplit(i)).Rows(0)
+                OfficerGroup &= dataRow.Item("FULLNAME").ToString() & "<br />"
+            Next
+            'จบชุดข้อมูลเจ้าหน้าที่เสนอทรัพย์หลุดจำนำ
             'ชุดข้อมูตำแหน่ง
-            result &= "<td>" & MemberTypeNameVal & "</td>"
+            result &= "<td>" & OfficerGroup & "</td>"
+            result &= "<td>" & AnnounceGroup & "</td>"
+            result &= "<td>" & OfficerGroup & "</td>"
             result &= "<td>" & editBtn & "&nbsp;" & deleteBtn & "</td>"
             result &= "</tr>"
         Next
@@ -158,7 +219,7 @@ Partial Class AuctionArea_CommitteeController_ajax
         con = getAssetConnection()
         cmd.Connection = con
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = """sp_getCommitteeMemberByEventId"""
+        cmd.CommandText = """sp_getCommitteeByEventId"""
         cmd.Parameters.Add(New OracleParameter("vEventId", OracleDbType.NVarchar2)).Value = eventId
         cmd.Parameters.Add(New OracleParameter("cur", OracleDbType.RefCursor)).Direction = ParameterDirection.Output
 
@@ -219,6 +280,28 @@ Partial Class AuctionArea_CommitteeController_ajax
         cmd.Connection = con
         cmd.CommandType = CommandType.StoredProcedure
         cmd.CommandText = """SP_GET_EMPLOYEE_ODB_FULLNAME"""
+        cmd.Parameters.Add(New OracleParameter("cur", OracleDbType.RefCursor)).Direction = ParameterDirection.Output
+        Try
+            da.SelectCommand = cmd
+            da.Fill(dt)
+        Catch ex As Exception
+
+        Finally
+            con.Close()
+        End Try
+
+        Return dt
+    End Function
+    Public Shared Function getEmployeeById(ByVal EmpId As String) As DataTable
+        Dim dt As New DataTable
+        Dim da As New OracleDataAdapter
+        Dim con As New OracleConnection
+        Dim cmd As New OracleCommand
+        con = getConnection()
+        cmd.Connection = con
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.CommandText = """SP_GET_EMPLOYEE_FULLNAME_BYID"""
+        cmd.Parameters.Add(New OracleParameter("vEmployeeId", OracleDbType.Varchar2)).Value = EmpId
         cmd.Parameters.Add(New OracleParameter("cur", OracleDbType.RefCursor)).Direction = ParameterDirection.Output
         Try
             da.SelectCommand = cmd
@@ -308,7 +391,8 @@ Partial Class AuctionArea_CommitteeController_ajax
     End Function
 
     Public Shared Function AddCommittee(ByVal vEventId As String, ByVal vMemberTypeId As Integer,
-                                         ByVal vUserId As String, ByVal vBranchId As Integer, ByVal vRowNum As Integer) As Boolean
+                                         ByVal vUserId As String, ByVal vBranchId As Integer, ByVal vRowNum As Integer,
+                                        ByVal vAnnouncerId As String, ByVal vOfficerId As String) As Boolean
 
         Dim liMaxCommitteeMemberId As Integer
         Dim dt2 As New DataTable
@@ -333,8 +417,8 @@ Partial Class AuctionArea_CommitteeController_ajax
         cmd.Parameters.Add(New OracleParameter("vUserId", OracleDbType.NVarchar2)).Value = vUserId
         cmd.Parameters.Add(New OracleParameter("vBranchId", OracleDbType.Int32)).Value = vBranchId
         cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = vRowNum
-        cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = "0"
-        cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = "0"
+        cmd.Parameters.Add(New OracleParameter("vAnnouncerId", OracleDbType.NVarchar2)).Value = vAnnouncerId
+        cmd.Parameters.Add(New OracleParameter("vOfficerId", OracleDbType.NVarchar2)).Value = vOfficerId
 
         Try
             cmd.ExecuteNonQuery()

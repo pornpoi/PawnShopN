@@ -20,24 +20,162 @@
     <link href="../Bootstrap/css/datapicker/datepicker3.css" rel="stylesheet" />
     <link href="../Bootstrap/css/Grid.css" rel="stylesheet" />
 </head>
+<script>
+    $(document).ready(function () {
+        jQuery.validator.addMethod("notEqualToGroup", function(value, element, options) {
+            var elems = $(element).parents('form').find(options[0]);
+            var valueToCompare = value;
+            var matchesFound = 0;
+            jQuery.each(elems, function(){
+                thisVal = $(this).val();
+                if(thisVal == valueToCompare){
+                    matchesFound++;
+                }
+            });
+            if(this.optional(element) || matchesFound <= 1) {
+                elems.removeClass('error');
+                return true;
+            } else {
+                elems.addClass('error');
+            }
+        }, "ห้ามเลือกรายชื่อซ้ำกันค่ะ");
 
+        $("#comittFrm").validate({
+            rules: {
+                commit0: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit1: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit2: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit3: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit4: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit5: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit6: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit7: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit8: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                commit9: {
+                    required: true,
+                    notEqualToGroup: ['.distinctCommit']
+                },
+                branch0: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch1: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch2: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch3: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch4: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch5: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch6: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch7: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch8: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+                branch9: {
+                    required: true,
+                    notEqualToGroup: ['.distinctBranch']
+                },
+            },
+            messages: {
+                "select[]": "Please select",
+            },
+            submitHandler: function() {
+                var memberTypeId = 0;
+                var rownum = getMaxRowNum();
+                for (i = 0; i <= committNum; i++) {
+                    if (i >= 3) {
+                        memberTypeId = 4;
+
+                    } else {
+                        memberTypeId = i + 1;
+                    }
+                    for (j = 0 ; j <= branchNum; j++) {
+                        //alert($("#commit" + i).val() + "," + $("#branch" + j).val());
+                        addDataToDB(v_eventId, memberTypeId, $("#commit" + i).val(), $("#branch" + j).val(), rownum);
+                    }
+                }
+                alert("บันทึกข้อมูลเรียบร้อย");
+                LoadDefault(v_eventId);
+                $('#myModal').modal('hide');
+                LoadDropdownDefault();
+                //$('html, body').animate({ scrollTop: $("#dataTable").offset().top }, 2000);
+                return false;
+            }
+        });
+    });
+
+
+</script>
+<style>
+    label.error, label.error {
+        color: red;
+        font-style: italic;
+    }
+</style>
 <body>
     <div class="container-fluid">
         <header class="page-header">
             <h3><i class="fa fa-file-text-o " aria-hidden="true"></i>&nbsp;ข้อมูลคณะกรรมการประเมินทรัพย์หลุดจำนำ</h3>
         </header>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>ประกาศที่ : <mark><%=EventNo %></mark></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>วันที่ : <mark><%=DateEventStart %></mark></h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12" >
+            <div class="col-md-12">
                 <h4>ประเภททรัพย์หลุดจำนำ : <mark><%=GroupName %></mark></h4>
             </div>
         </div>
@@ -55,14 +193,15 @@
 
                 <!-- Modal content-->
                 <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">ข้อมูลคณะกรรมการประเมินทรัพย์หลุดจำนำ</h4>
-                    </div>
+                    <form class="form-horizontal" id="comittFrm">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ข้อมูลคณะกรรมการประเมินทรัพย์หลุดจำนำ</h4>
+                        </div>
 
-                    <div class=" modal-body">
+                        <div class=" modal-body">
 
-                        <form class="form-horizontal" id="comittFrm">
+
                             <header class="page-header" style="margin-top: -5px">
                                 <h4><i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;ข้อมูลกรรมการ</h4>
                             </header>
@@ -116,13 +255,14 @@
 
                                 </div>
                             </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" id="save"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;บันทึกข้อมูล</button>
-                        <button class="btn btn-info" id="update"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;อัพเดทข้อมูล</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal" id="closeBtn"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Close</button>
-                    </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" id="save"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;บันทึกข้อมูล</button>
+                            <button type="submit" class="btn btn-info" id="update"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;อัพเดทข้อมูล</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="closeBtn"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;Close</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -134,16 +274,15 @@
 
     var v_rowId = -1;
     //รับค่าจากหน้าเต้ย
-    //var v_eventId = 1;
     var v_eventId = <%=eventId %> ;
     $(document).ready(function () {
         LoadDefault(v_eventId);
         //load dropdown สำหรับกรรมการคนที่ 1-3
         for (j = 0; j <= 2; j++) {
-            innerDrw(j, "committ", -1);
+            innerDrw(j, "committ", "");
         }
         //Load dropdown สำหรับสาขา
-        innerDrw(0, "branch", -1);
+        innerDrw(0, "branch", "");
 
         $("#GetRow").click(function () {
             alert(getMaxRowNum());
@@ -166,7 +305,7 @@
 
         $("#addBranch").click(function () {
             branchNum++;
-            addBranchRow(branchNum, -1);
+            addBranchRow(branchNum, "");
             //$('html, body').animate({ scrollTop: $("#branchBlg").offset().top }, 2000);
         });
 
@@ -178,28 +317,28 @@
             //$('html, body').animate({ scrollTop: $("#branchBlg").offset().top }, 2000);
         });
 
-        $("#save").click(function () {
-            var memberTypeId = 0;
-            var rownum = getMaxRowNum();
-            for (i = 0; i <= committNum; i++) {
-                if (i >= 3) {
-                    memberTypeId = 4;
+        //$("#save").click(function () {
+        //    var memberTypeId = 0;
+        //    var rownum = getMaxRowNum();
+        //    for (i = 0; i <= committNum; i++) {
+        //        if (i >= 3) {
+        //            memberTypeId = 4;
 
-                } else {
-                    memberTypeId = i + 1;
-                }
-                for (j = 0 ; j <= branchNum; j++) {
-                    //alert($("#commit" + i).val() + "," + $("#branch" + j).val());
-                    addDataToDB(v_eventId, memberTypeId, $("#commit" + i).val(), $("#branch" + j).val(), rownum);
-                }
-            }
-            alert("บันทึกข้อมูลเรียบร้อย");
-            LoadDefault(v_eventId);
-            $('#myModal').modal('hide');
-            LoadDropdownDefault();
-            $('html, body').animate({ scrollTop: $("#dataTable").offset().top }, 2000);
-            return false;
-        });
+        //        } else {
+        //            memberTypeId = i + 1;
+        //        }
+        //        for (j = 0 ; j <= branchNum; j++) {
+        //            //alert($("#commit" + i).val() + "," + $("#branch" + j).val());
+        //            addDataToDB(v_eventId, memberTypeId, $("#commit" + i).val(), $("#branch" + j).val(), rownum);
+        //        }
+        //    }
+        //    alert("บันทึกข้อมูลเรียบร้อย");
+        //    LoadDefault(v_eventId);
+        //    $('#myModal').modal('hide');
+        //    LoadDropdownDefault();
+        //    //$('html, body').animate({ scrollTop: $("#dataTable").offset().top }, 2000);
+        //    return false;
+        //});
 
         $('#update').click(function () {
             //ลบข้อมูลเดิมออก
@@ -218,30 +357,32 @@
                 }
             });
             //ใส่ข้อมูลใหม่ลงไป
-            var memberTypeId = 0;
-            var rownum = getMaxRowNum();
-            for (i = 0; i <= committNum; i++) {
-                if (i >= 3) {
-                    memberTypeId = 4;
+            //var memberTypeId = 0;
+            //var rownum = getMaxRowNum();
+            //for (i = 0; i <= committNum; i++) {
+            //    if (i >= 3) {
+            //        memberTypeId = 4;
 
-                } else {
-                    memberTypeId = i + 1;
-                }
-                for (j = 0 ; j <= branchNum; j++) {
-                    //alert($("#commit" + i).val() + "," + $("#branch" + j).val());
-                    addDataToDB(v_eventId, memberTypeId, $("#commit" + i).val(), $("#branch" + j).val(), rownum);
-                }
-            }
-            alert("อัพเดทข้อมูลเรียบร้อย");
-            LoadDefault(v_eventId);
-            $('#myModal').modal('hide');
-            LoadDropdownDefault();
-            //$('html, body').animate({ scrollTop: $("#dataTable").offset().top }, 2000);
-            return false;
+            //    } else {
+            //        memberTypeId = i + 1;
+            //    }
+            //    for (j = 0 ; j <= branchNum; j++) {
+            //        //alert($("#commit" + i).val() + "," + $("#branch" + j).val());
+            //        addDataToDB(v_eventId, memberTypeId, $("#commit" + i).val(), $("#branch" + j).val(), rownum);
+            //    }
+            //}
+            //alert("อัพเดทข้อมูลเรียบร้อย");
+            //LoadDefault(v_eventId);
+            //$('#myModal').modal('hide');
+            //LoadDropdownDefault();
+            ////$('html, body').animate({ scrollTop: $("#dataTable").offset().top }, 2000);
+            //return false;
         });
 
         $("#closeBtn").click(function () {
-            LoadDropdownDefault();
+            ClearDropDownValue();
+            $("#comittFrm").validate().resetForm();
+            //LoadDropdownDefault();
         });
         $("#addDataBtn").click(function () {
             $('#save').show();
@@ -249,6 +390,30 @@
         });
 
     });
+
+    function ClearDropDownValue(){
+        if (committNum > 3) {
+            for (i = committNum; i > 3 ; i--) {
+                removeCommittRow(i)
+                committNum--;
+            }
+        }
+        if (branchNum > 0) {
+            for (i = branchNum; i > 0 ; i--) {
+                removeBranchRow(i)
+                branchNum--;
+            }
+        }
+        $('#commit0').val("").change();
+        $('#commit1').val("").change();
+        $('#commit2').val("").change();
+        $('#commit3').val("").change();
+        $('#branch0').val("").change();
+        $('#announcer0').val("").change();
+        $('#announcer1').val("").change();
+        $('#officer0').val("").change();
+        $('#officer1').val("").change();
+    }
 
     function LoadDefault(num) {
         $.ajax({
@@ -272,10 +437,10 @@
         for (i = 1; i <= 3 ; i++) {
             //alert(arr[i]);
             if (i <= 3) {
-                innerDrw(i - 1, "committ", -1);
+                innerDrw(i - 1, "committ", "");
             } else {
                 committNum++;
-                addCommittRow(i - 1, -1);
+                addCommittRow(i - 1, "");
             }
         }
         //ชุดข้อมูลสาขา
@@ -288,10 +453,10 @@
         for (i = 1; i <= 1; i++) {
             //alert(arr[i]);
             if (i == 1) {
-                innerDrw(i - 1, "branch", -1);
+                innerDrw(i - 1, "branch", "");
             } else {
                 branchNum++;
-                addBranchRow(i - 1, -1);
+                addBranchRow(i - 1, "");
             }
         }
     }

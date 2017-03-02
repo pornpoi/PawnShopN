@@ -30,6 +30,10 @@ Partial Class AuctionArea_CommitteeController_ajax
             LoadAllData(Request.Form("eventId"))
         ElseIf (type = "deleteRow") Then
             Response.Write(DeleteRow(Request.Form("eventId"), Request.Form("rowNum")))
+        ElseIf (type = "editRowAnnouncer") Then
+            LoadAnnouncerDataForEdit(Request.Form("eventId"), Request.Form("rowNum"))
+        ElseIf (type = "editRowOfficer") Then
+            LoadOfficerDataForEdit(Request.Form("eventId"), Request.Form("rowNum"))
         ElseIf (type = "editRowBranch") Then
             LoadBranchDataForEdit(Request.Form("eventId"), Request.Form("rowNum"))
         ElseIf (type = "editRowEmp") Then
@@ -42,8 +46,8 @@ Partial Class AuctionArea_CommitteeController_ajax
         Dim dt As New DataTable
         dt = getEmployeeddl()
         Dim result As String = ""
-        result &= "<select id='commit" & num & "' class='form-control'>"
-        result &= "<option value='-1'>--กรุณาเลือกกรรมการ--</option>"
+        result &= "<select id='commit" & num & "' name='commit" & num & "' class='form-control distinctCommit'>"
+        result &= "<option value=''>--กรุณาเลือกกรรมการ--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next
@@ -55,8 +59,8 @@ Partial Class AuctionArea_CommitteeController_ajax
         Dim dt As New DataTable
         dt = getEmployeeddl()
         Dim result As String = ""
-        result &= "<select id='officer" & num & "' class='form-control'>"
-        result &= "<option value='-1'>--กรุณาเลือกเจ้าหน้าที่--</option>"
+        result &= "<select id='officer" & num & "' name='officer" & num & "' class='form-control distinctOffice'>"
+        result &= "<option value=''>--กรุณาเลือกเจ้าหน้าที่--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next
@@ -67,23 +71,23 @@ Partial Class AuctionArea_CommitteeController_ajax
         Dim dt As New DataTable
         dt = getEmployeeddl()
         Dim result As String = ""
-        result &= "<select id='announcer" & num & "' class='form-control'>"
-        result &= "<option value='-1'>--กรุณาเลือกโฆษก--</option>"
+        result &= "<select id='announcer" & num & "' name='announcer" & num & "' class='form-control distinctAnnouncer'>"
+        result &= "<option value=''>--กรุณาเลือกโฆษก--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next
         result &= "</select>"
         Response.Write(result)
     End Sub
-    Sub LoadBranch(ByVal num As String, Optional ByVal branchId As Integer = -1)
+    Sub LoadBranch(ByVal num As String, Optional ByVal branchId As String = "")
         Dim dtBranch As New DataTable
         Dim result As String = ""
 
         dtBranch = getBranch()
-        result &= "<select id='branch" & num & "'  class='form-control '>"
-        result &= "<option value='-1'>--กรุณาเลือกสาขา--</option>"
+        result &= "<select id='branch" & num & "' name='branch" & num & "'  class='form-control distinctBranch'>"
+        result &= "<option value=''>--กรุณาเลือกสาขา--</option>"
         For Each dr As DataRow In dtBranch.Rows
-            result &= "<option value='" & dr("BranchId") & "' " & If(branchId = dr("BranchId"), "selected", "") & ">" & dr("Name") & "</option>"
+            result &= "<option value='" & dr("BranchId") & "' " & If(branchId = dr("BranchId").ToString, "selected", "") & ">" & dr("Name") & "</option>"
         Next
         result &= "</select>"
         Response.Write(result)
@@ -126,12 +130,66 @@ Partial Class AuctionArea_CommitteeController_ajax
         Response.Write(result)
 
     End Sub
+    Sub LoadOfficerDataForEdit(ByVal EventId As String, ByVal RowNum As Integer)
+        Dim dt As New DataTable
+        Dim result As String = ""
+        Dim announcerSet As String = ""
+        Dim count As Integer = 0
+        Dim strAnnouncerSplit As Array
+        Dim AnnounceGroup As String = ""
+        dt = getCommitteeMemberByEventIdAndRowNum(EventId, RowNum)
+
+        Dim distDTAnnouncer = dt.AsEnumerable().Select(Function(rowData) New With {
+                Key .RowNum = rowData.Field(Of Decimal)("RowNum"),
+                Key .AnnouncerId = rowData.Field(Of String)("OfficerId")
+                }).Distinct()
+
+        For Each distDTAnnouncerRow In distDTAnnouncer
+            announcerSet &= distDTAnnouncerRow.AnnouncerId
+        Next
+
+        strAnnouncerSplit = Split(announcerSet, "|")
+        For i = 0 To strAnnouncerSplit.Length - 1
+            AnnounceGroup &= "," & strAnnouncerSplit(i).ToString
+            count = count + 1
+        Next
+        result &= count & AnnounceGroup
+        Response.Write(result)
+
+    End Sub
+    Sub LoadAnnouncerDataForEdit(ByVal EventId As String, ByVal RowNum As Integer)
+        Dim dt As New DataTable
+        Dim result As String = ""
+        Dim announcerSet As String = ""
+        Dim count As Integer = 0
+        Dim strAnnouncerSplit As Array
+        Dim AnnounceGroup As String = ""
+        dt = getCommitteeMemberByEventIdAndRowNum(EventId, RowNum)
+
+        Dim distDTAnnouncer = dt.AsEnumerable().Select(Function(rowData) New With {
+                Key .RowNum = rowData.Field(Of Decimal)("RowNum"),
+                Key .AnnouncerId = rowData.Field(Of String)("AnnouncerId")
+                }).Distinct()
+
+        For Each distDTAnnouncerRow In distDTAnnouncer
+            announcerSet &= distDTAnnouncerRow.AnnouncerId
+        Next
+
+        strAnnouncerSplit = Split(announcerSet, "|")
+        For i = 0 To strAnnouncerSplit.Length - 1
+            AnnounceGroup &= "," & strAnnouncerSplit(i).ToString
+            count = count + 1
+        Next
+        result &= count & AnnounceGroup
+        Response.Write(result)
+
+    End Sub
     Sub LoadAllData(ByVal num As String)
         Dim dt As New DataTable
         Dim strAnnouncerSplit As Array
         Dim strOfficerSplit As Array
         Dim result As String = "<table class='table table-striped table-bordered table-hover' border='1'>"
-        result &= "<thead><tr><th rowspan='2' scope='col'>สถานธนานุบาลกรุงเทพมหานคร</th><th rowspan='2' scope='col'>คณะกรรมการประเมินทรัพย์หลุดจำนำ</th><th colspan='2' scope='col'>คณะกรรมการดำเนินการจำหน่ายทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>เจ้าหน้าที่เสนอทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>&nbsp;</th></tr>"
+        result &= "<thead><tr><th rowspan='2' scope='col' class='align-middle'>สถานธนานุบาลกรุงเทพมหานคร</th><th rowspan='2' scope='col'>คณะกรรมการประเมินทรัพย์หลุดจำนำ</th><th colspan='2' scope='col'>คณะกรรมการดำเนินการจำหน่ายทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>เจ้าหน้าที่เสนอทรัพย์หลุดจำนำ</th><th rowspan='2' scope='col'>&nbsp;</th></tr>"
         result &= "<tr><th>พนักงานสาขาตำแหน่ง</th><th>โฆษก</th></tr></thead>"
         dt = getCommitteeMemberByEventId(num)
         'ชุดข้อมูลของจำนวนแถวชุดข้อมูล
@@ -143,7 +201,7 @@ Partial Class AuctionArea_CommitteeController_ajax
 
             result &= "<tr>"
 
-            Dim editBtn As String = "<a href='#' class='btn btn-primary btn-sm' onclick=""editRow(" & row.RowNum & "," & "'" & num & "')""><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;แก้ไข</a>"
+            Dim editBtn As String = "<a href='#' id='edit_a' class='btn btn-primary btn-sm' onclick=""editRow(" & row.RowNum & "," & "'" & num & "')""><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;แก้ไข</a>"
             Dim deleteBtn As String = "<a href='#' class='btn btn-danger btn-sm' onclick=""deleteRow(" & row.RowNum & "," & "'" & num & "')""><i class='fa fa-times' aria-hidden='True'></i>&nbsp;ลบ</a>"
             'ชุดข้อมูลของสาขา
             Dim distDTBranch = dt.AsEnumerable().Select(Function(rowData) New With {
@@ -441,7 +499,7 @@ Partial Class AuctionArea_CommitteeController_ajax
         con = getAssetConnection()
         cmd.Connection = con
         cmd.CommandType = CommandType.StoredProcedure
-        cmd.CommandText = """sp_DeleteCommitteeMember"""
+        cmd.CommandText = """sp_DeleteCommitteeAnnouncer"""
         cmd.Parameters.Add(New OracleParameter("vEventId", OracleDbType.NVarchar2)).Value = vEventId
         cmd.Parameters.Add(New OracleParameter("vRowNum", OracleDbType.Int32)).Value = vRowNum
 

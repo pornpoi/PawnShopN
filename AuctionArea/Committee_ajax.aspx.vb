@@ -37,23 +37,23 @@ Partial Class AdminConfig_Committee_ajax
         Dim dt As New DataTable
         dt = getEmployeeddl()
         Dim result As String = ""
-        result &= "<select id='commit" & num & "' class='form-control'>"
-        result &= "<option value='-1'>--กรุณาเลือกกรรมการ--</option>"
+        result &= "<select id='commit" & num & "' name='commit" & num & "' class='form-control distinctCommit'>"
+        result &= "<option value=''>--กรุณาเลือกกรรมการ--</option>"
         For Each dr As DataRow In dt.Rows
             result &= "<option value='" & dr("EmployeeId") & "'" & If(EmpId = dr("EmployeeId"), "selected", "") & ">" & dr("FullName") & "</option>"
         Next
         result &= "</select>"
         Response.Write(result)
     End Sub
-    Sub LoadBranch(ByVal num As String, Optional ByVal branchId As Integer = -1)
+    Sub LoadBranch(ByVal num As String, Optional ByVal branchId As String = "")
         Dim dtBranch As New DataTable
         Dim result As String = ""
 
         dtBranch = getBranch()
-        result &= "<select id='branch" & num & "'  class='form-control '>"
-        result &= "<option value='-1'>--กรุณาเลือกสาขา--</option>"
+        result &= "<select id='branch" & num & "' name='branch" & num & "'  class='form-control distinctBranch'>"
+        result &= "<option value=''>--กรุณาเลือกสาขา--</option>"
         For Each dr As DataRow In dtBranch.Rows
-            result &= "<option value='" & dr("BranchId") & "' " & If(branchId = dr("BranchId"), "selected", "") & ">" & dr("Name") & "</option>"
+            result &= "<option value='" & dr("BranchId") & "' " & If(branchId = dr("BranchId").ToString, "selected", "") & ">" & dr("Name") & "</option>"
         Next
         result &= "</select>"
         Response.Write(result)

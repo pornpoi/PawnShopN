@@ -244,6 +244,7 @@
                                         <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">

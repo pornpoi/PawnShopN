@@ -6,85 +6,108 @@
 <head runat="server">
     <title></title>
 
-    
+    <link href="../Bootstrap/Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Bootstrap/Content/font-awesome.min.css" rel="stylesheet" />
+    <script src="../Bootstrap/Scripts/jquery-3.1.1.js" type="text/javascript"></script>
+    <script src="../Bootstrap/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="../Bootstrap/Scripts/bootstrap.min.js" type="text/javascript"></script>
+    <script src="../Bootstrap/Scripts/moment.js"></script>
+    <script src="../Bootstrap/Scripts/datepicker-thai/bootstrap-datepicker.js"></script>
+    <script src="../Bootstrap/Scripts/datepicker-thai/bootstrap-datepicker-thai.js"></script>
+    <script src="../Bootstrap/Scripts/datepicker-thai/locales/bootstrap-datepicker.th.js"></script>
+    <link href="../Bootstrap/css/pagination_ys.css" rel="stylesheet" />
+    <link href="../Bootstrap/css/datapicker/datepicker3.css" rel="stylesheet" />
+    <link href="../Bootstrap/css/Grid.css" rel="stylesheet" />
+
 
 
 </head>
 <body>
     <form id="form1" runat="server">
-    <div id="PageLoad">
-    <br />
-    <header class="page-header">
+        <header class="page-header">
             <h3 class="uk-h3"><i class="fa fa-file-text-o " aria-hidden="true"></i>&nbsp;ประกาศการขายทรัพย์หลุด</h3>
     </header>
 
-    <asp:HiddenField ID="hiddenRole" runat="server" />
-        <input type='button' id="btnAdd" value='เพิ่มประกาศ' style='color:#000000' class='uk-button uk-button-success' />
-        <%--<input type='button' id="Button1" value='เพิ่มประกาศ' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCon('" + data[i].EventID + "')\"/>--%>
-        <table id="tableData" class="uk-table" border="1" style="width:1200px">
-            <thead>
-                <tr bgcolor="#ffcc00">
-                    <td style="text-align: center">ลำดับ</td>
+        <asp:HiddenField ID="hiddenRole" runat="server" />
+        <%--<input type='button' id="btnAdd" data-target="#modalAlert" value='เพิ่มประกาศ' style='color:#000000' class='btn btn-success' />--%>
 
-                    <td style="text-align: center; display: none">EventID</td>
-                    <td style="text-align: center" width="50px">ประกาศ</td>
-                    <td style="text-align: center" width="300px">วันเดือนปี</td>
-                    <td style="text-align: center" width="400px">ประเภททรัพย์หลุดจำนำ</td>
-                    <td style="text-align: center" width="200px">สถานที่จำหน่าย</td> 
-                    <td style="text-align: center">เวลา</td>
-                    <td style="text-align: center" width="500px">จากสถานธนานุบาลฯ</td>
-                    <td style="text-align: center" width="10px">จัดการ</td>
-                    <td style="text-align: center">ปรับปรุง</td>
+        <button type="button" class="btn btn-success " data-toggle="modal" data-target="#modalAddEvent" id="btnAdd" style="margin-bottom: 10px;"><i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;เพิ่มประกาศ</button>
+
+        <table id="tableData" class="table table-striped table-bordered table-hover" border="1" style="width: 1024px">
+            <thead>
+                <tr>
+                    <th style="text-align: center">ลำดับ</th>
+                    <th style="text-align: center; display: none">EventID</th>
+                    <th style="text-align: center" width="50px">ประกาศ</th>
+                    <th style="text-align: center" width="300px">วันเดือนปี</th>
+                    <th style="text-align: center" width="400px">ประเภททรัพย์หลุดจำนำ</th>
+                    <th style="text-align: center" width="200px">สถานที่จำหน่าย</th>
+                    <th style="text-align: center">เวลา</th>
+                    <th style="text-align: center" width="500px">จากสถานธนานุบาลฯ</th>
+                    <th style="text-align: center" width="10px">จัดการ</th>
+                    <th style="text-align: center">ปรับปรุง</th>
                 </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
 
-        <div class="uk-modal" id="modalAlert">
-            <div class="uk-modal-dialog">
-                <div class="uk-modal-header uk-alert-danger">รายการ</div>
-                <div class="uk-form">
-                    ทำรายการเรียบร้อย
+        <div id="modalAlert" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg ">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">รายการ</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>ทำรายการเรียบร้อย</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="modalConfirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-body">
+                    <div class="modal-dialog">
+                        <div class="page-header">ลบประกาศ</div>
+                        ต้องการปิดประกาศลงหรือไม่?
+                    <div class="modal-footer" align="right">
+                        <input type='button' id="BtnCancelYES" value='ตกลง' style='color: #000000' class='btn btn-primary' />
+                        <input type='button' id="BtnCancelNO" value='ยกเลิก' style='color: #000000' class='btn btn-danger' data-dismiss="modal" />
+                    </div>
+                    </div>
                 </div>
             </div>
-
         </div>
 
-        <div class="uk-modal" id="modalConfirm">
-            <div class="uk-modal-dialog">
-                <div class="uk-modal-header">ลบประกาศ</div>
-                ต้องการปิดประกาศลงหรือไม่?
-                <div class="uk-modal-footer" align="right">
-                    <input type='button' id="BtnCancelYES" value='ตกลง' style='color:#000000' class='uk-button  uk-button-primary' />
-                    <input type='button' id="BtnCancelNO" value='ยกเลิก' style='color:#000000' class='uk-button uk-button-danger uk-modal-close' />
-                </div>
-            </div>
-        </div>
+        <div id="modalAddEvent" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">ประกาศทรัพย์หลุด</h4>
+                    </div>
+                    <div class="modal-body">
 
-        <div class="uk-modal" id="modalAddEvent">
-            <div class="uk-modal-dialog" style="width:65%">
-                <div class="uk-modal-header uk-alert-danger">เพิ่มประกาศใหม่</div>
-                <div class="uk-form" >
-   
-               <table class="uk-table uk-table-condensed">
-
-                   <tr>
-                       <td>
-                           วันที่
-                       </td>
-                       <td >
-                           <div class="uk-form"> 
-                                <input id="txtDateEvent" type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" />
-                                <%--<input id="txtDateEvent" type="text" />--%>
-                            </div>
-                       </td>
-                       <td>เวลา</td>
-                       <td>
-
-
-                            <asp:DropDownList ID="ddlTime" runat="server" CssClass ="form-control ">
+                        <table class="uk-table uk-table-condensed">
+                            <tr>
+                                <td>วันที่
+                                </td>
+                                <td>
+                                    <div>
+                                        <input id="txtDateEvent" type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" class='form-control' />
+                                        <%--<input id="txtDateEvent" type="text" />--%>
+                                    </div>
+                                </td>
+                                <td>เวลา</td>
+                                <td>
+                                    <asp:DropDownList ID="ddlTime" runat="server" class='form-control '>
                                         <asp:ListItem Value="00:00"></asp:ListItem>
                                         <asp:ListItem Value="01:00"></asp:ListItem>
                                         <asp:ListItem Value="02:00"></asp:ListItem>
@@ -109,107 +132,75 @@
                                         <asp:ListItem Value="21:00"></asp:ListItem>
                                         <asp:ListItem Value="22:00"></asp:ListItem>
                                         <asp:ListItem Value="23:00"></asp:ListItem>
-                                        
                                     </asp:DropDownList>
-                            <%--<div class="uk-form"> 
-                                <input id="txtTimeEvent" type="text" data-uk-timepicker="{format:'12h'}" runat="server" />
-                            </div>--%>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td>
-                           รายละเอียดสถานที่
-                       </td>
-                       <td>
-                           <%--<input id="txtEventNo" type="text" class="uk-form-width-medium" runat="server" />--%>
-                           <asp:TextBox ID="txtLocation" class="uk-form-width-medium" runat="server"></asp:TextBox>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td>
-                           เลขประกาศ
-                       </td>
-                       <td>
-                           <input id="txtEventNo" type="text" class="uk-form-width-medium" runat="server" />
-                         <%--  <asp:TextBox ID="txtEventNo" class="uk-form-width-medium" runat="server"></asp:TextBox>--%>
-                       </td>
-                   </tr>
-                   <tr>
-                       <td>
-                           ประเภททรัพย์
-                       </td>
-                       <td>
-                           <asp:DropDownList ID="DropProduct" runat="server" >     
-                           </asp:DropDownList>
-                       </td>     
-                   </tr>
-                   <tr>
-                       <td>
-                           สถานธนานุบาล
-                       </td>
-                       <td>
-                       
-                       <div class="page-header">
-                                <h3><i class="fa fa-home" aria-hidden="true"></i>&nbsp;สาขา</h3>
-
-                            </div>
-                            <div id="branchBlg">
-                                <div class="form-group row">
-                                    <label class="control-label col-sm-2" for="email">สาขาที่ 1:</label>
-                                    <div class="col-sm-10" id="brhBlg0">
-                                        <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
-                                    </div>
+                                    <%--<div class="uk-form"> 
+                                    <input id="txtTimeEvent" type="text" data-uk-timepicker="{format:'12h'}" runat="server" />
+                                </div>--%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>รายละเอียดสถานที่
+                                </td>
+                                <td>
+                                    <%--<input id="txtEventNo" type="text" class="uk-form-width-medium" runat="server" />--%>
+                                    <asp:TextBox ID="txtLocation" class="form-control" runat="server"></asp:TextBox>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>เลขประกาศ
+                                </td>
+                                <td>
+                                    <input id="txtEventNo" type="text" class="form-control" runat="server" />
+                                    <%--  <asp:TextBox ID="txtEventNo" class="uk-form-width-medium" runat="server"></asp:TextBox>--%>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>ประเภททรัพย์
+                                </td>
+                                <td>
+                                    <asp:DropDownList ID="DropProduct" runat="server" class='form-control'>
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="page-header">
+                            <h3><i class="fa fa-home" aria-hidden="true"></i>&nbsp;สาขา</h3>
+                        </div>
+                        <div id="branchBlg">
+                            <div class="form-group row">
+                                <label class="control-label col-sm-2" for="email">สาขาที่ 1:</label>
+                                <div class="col-sm-10" id="brhBlg0">
+                                    <%--<input type="text" class="form-control" id="commit0" placeholder="ประธานกรรมการ">--%>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <div class="col-sm-offset-2 col-sm-10">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <a href="#" class="btn btn-success" id="addBranch">
+                                    <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;เพิ่มสาขา</a>
+                                <a href="#" class="btn btn-danger" id="removeBranch">
+                                    <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;ลดสาขา</a>
 
-                                    <a href="#" class="uk-button uk-button-primary" id="addBranch">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>&nbsp;เพิ่มสาขา</a>
-                                    <a href="#" class="uk-button uk-button-danger" id="removeBranch">
-                                        <i class="fa fa-minus-circle" aria-hidden="true"></i>&nbsp;ลดสาขา</a>
-
-                                </div>
                             </div>
+                        </div>
+                        <div class="row">&nbsp;</div>
+                    </div>
+                    <div class="modal-footer" align="right">
+                        <%--<asp:Button runat="server" ID="btnConfirm" Text="ยืนยันการเพิ่มข้อมูล" class="uk-button uk-button-danger"  />--%>
+                        <input type='button' id="btnAddEvent" value='เพิ่มประกาศ' style='color: #000000' class='btn btn-primary' />
+                        <button class="btn btn-info" id="btnUpdateEvent"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;อัพเดทข้อมูล</button>
+                        <%--<input type='button' id="BtnCancelA" value='ยกเลิก' style='color:#000000' class='btn btn-default' data-dismiss="modal" />--%>
+                        <button id="BtnCancelA" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <%--<button class="uk-button uk-button-danger">ยืนยันการบันทึกรายการ</button>--%>
+                    </div>
 
-
-                        <%--<asp:Repeater ID="RpListBranch" runat="server" >
-                            <ItemTemplate>
-                                <asp:CheckBox ID="chkboxBranch" runat="server" Text='<%# Container.DataItem("BranchID") %>'/><br />
-                            </ItemTemplate>
-                        </asp:Repeater>  --%> 
-                        
-                                       
-                       </td>
-                   </tr>
-                   <tr>
-                       <td></td>
-                       <td>
-                           
-                       </td>
-                   </tr>
-               </table>
+                </div>
             </div>
-            <div class="uk-modal-footer" align="right">
-                <%--<asp:Button runat="server" ID="btnConfirm" Text="ยืนยันการเพิ่มข้อมูล" class="uk-button uk-button-danger"  />--%>
-                <input type='button' id="btnAddEvent" value='เพิ่มประกาศ' style='color:#000000' class='uk-button uk-button-primary' />
-                <input type='button' id="btnUpdateEvent" value='อัพเดทข้อมูล' style='color:#000000' class='uk-button uk-button-primary' />
-                <input type='button' id="BtnCancelA" value='ยกเลิก' style='color:#000000' class='uk-button uk-button-danger uk-modal-close' />
-                <%--<button class="uk-button uk-button-danger">ยืนยันการบันทึกรายการ</button>--%>
-            
+            <div id="ManageCommit">
             </div>
-
-            </div>
-        </div>
-
-        <div id="ManageCommit">
-        </div>
-
-        
         </div>
 
     </form>
-    <div id="Content"></div>
 </body>
 
 
@@ -219,10 +210,10 @@
     var gEventID = "";
     $(document).ready(function () {
 
-        innerDrw(0, "branch" ,-1);
+        innerDrw(0, "branch", -1);
         loadDataEventAll()
         getProduct();
-        
+
     });
 
 
@@ -238,6 +229,7 @@
     }
 
     $("#btnAddEvent").click(function () {
+
         AddEvent();
         //getRowBranch("TEST");
     });
@@ -246,7 +238,8 @@
         vEventID = EventID;
 
         //getProduct();
-        AlertModal("modalAddEvent");
+        //AlertModal("modalAddEvent");
+        $('#modalAddEvent').modal('show');
         $("#btnAddEvent").hide();
         $("#btnUpdateEvent").show();
         getDataEvent(vEventID);
@@ -266,7 +259,7 @@
         deleteBranch(vEventID);
         AlertModal("modalAlert");
         loadDataEventAll();
-        
+
     });
     $("#BtnCancelNO").click(function () {
         loadDataEventAll();
@@ -274,7 +267,7 @@
 
 
     $('#btnAdd').click(function () {
-        AlertModal("modalAddEvent");
+        //AlertModal("modalAddEvent");
         $("#btnAddEvent").show();
         $("#btnUpdateEvent").hide();
         $('#txtDateEvent').val('');
@@ -297,7 +290,7 @@
             branchNum--;
         }
     });
-    
+
     //สำหรับสร้าง dropdownList
     function innerDrw(num, type, Id) {
         $.ajax({
@@ -324,7 +317,7 @@
 
     function addBranchRow(num, branchId) {
 
-        var comittCont = "<div class=\"form-group\" id=\"branchNumRow" + num + "\">";
+        var comittCont = "<div class=\"form-group row\" id=\"branchNumRow" + num + "\">";
         comittCont += "<label class=\"control-label col-sm-2\" for=\"pwd\">สาขาที่ " + (num + 1) + ":</label>";
         comittCont += "<div class=\"col-sm-10\" id=\"brhBlg" + num + "\">";
         comittCont += "</div>";
@@ -353,20 +346,19 @@
                 for (i = 0; i < data.length; i++) {
                     $('#tableData tbody').append(
                         "<tr>" +
-                            "<td style='text-align:center'>" + (i + 1) + "</td>" +
+                            "<td style='text-align:center'>" + (i + 1) + "</td>"
+                            + "<td style='text-align:center;display:none;'>" + data[i].EventID + "</td>"
+                            + "<td style='text-align:center'>" + data[i].EventNo + "</td>"
+                            + "<td style='text-align:center'>" + data[i].fDateEventStart + "</td>"
+                            + "<td style='text-align:center'>" + data[i].GroupName + "</td>"
+                            + "<td style='text-align:center'>" + data[i].Location + "</td>"
+                            + "<td style='text-align:center'>" + data[i].TIME + "</td>"
+                            + "<td style='text-align:center'>" + data[i].BranchName + "</td>"
+                            + "<td style='text-align:center'><input type='button' value='จัดกรรมการประเมินราคาทรัพย์หลุด' style='color:#000000' class='btn btn-default btn-sm btn-block' onclick=\"ManageCom('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
+                            + "<input type='button' value='จัดกรรมการควบคุมการจำหน่ายทรัพย์หลุด' style='color:#000000' class='btn btn-default btn-sm btn-block' onclick=\"ManageComControl('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
 
-                            "<td style='text-align:center;display:none;'>" + data[i].EventID + "</td>" +
-                            "<td style='text-align:center'>" + data[i].EventNo + "</td>" +
-                            "<td style='text-align:center'>" + data[i].fDateEventStart + "</td>" +
-                            "<td style='text-align:center'>" + data[i].GroupName + "</td>" +
-                            "<td style='text-align:center'>" + data[i].Location + "</td>" +
-                            "<td style='text-align:center'>" + data[i].TIME + "</td>" +
-                            "<td style='text-align:center'>" + data[i].BranchName + "</td>" +
-                            "<td style='text-align:center'><input type='button' value='จัดกรรมการประเมินราคาทรัพย์หลุด' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageCom('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
-                            + "<input type='button' value='จัดกรรมการควบคุมการจำหน่ายทรัพย์หลุด' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"ManageComControl('" + data[i].EventID + "','" + data[i].EventNo + "','" + data[i].fDateEventStart + "','" + data[i].GroupName + "')\"/>"
-                            +"</td>"
-                            + "<td style='text-align:center'><input type='button' value='แก้ไข' style='color:#000000' class='uk-button uk-width-1-1' onclick=\"Btnupdate('" + data[i].EventID + "')\"/>"
-                            + "<input type='button' value='ลบ' style='color:#ffffff' class='uk-button uk-width-1-1 uk-button-danger' onclick=\"Btncancel('" + data[i].EventID + "')\"/></td>" +
+                            + "<td style='text-align:center'><a href='#'  class='btn btn-primary btn-sm btn-block' onclick=\"Btnupdate('" + data[i].EventID + "')\"><i class='fa fa-pencil' aria-hidden='true'></i>&nbsp;แก้ไข</a>"
+                            + "<a href='#' class='btn btn-danger btn-sm btn-block' onclick=\"Btncancel('" + data[i].EventID + "')\"><i class='fa fa-times' aria-hidden='True'></i>&nbsp;ลบ</a></td>" +
                         "</tr>"
                          );
                 }
@@ -375,7 +367,7 @@
             error: function ajaxError(result) {
                 alert(result.status + ":" + result.statusText);
             }
-        });n
+        });
     }
 
     function ManageCom(EventID, EventNo, DateEventStart, GroupName) {
@@ -396,8 +388,8 @@
         var vProductType = $('#DropProduct').val();
         var vTime = $('#ddlTime').val();
         var vLocation = $('#txtLocation').val();
-        
-//        alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
+
+        //        alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
         $.ajax({
             url: "ajax/ajax_AuctionArea/AddEvent.aspx",
             data: "DateStartEvent=" + vDateStartEvent + "&EventNo=" + vEventNo + "&ProductType=" + vProductType + "&Time=" + vTime + "&Location=" + vLocation + "&type=AddEvent",
@@ -432,7 +424,7 @@
                 //alert(data);
             }
         });
-        
+
         var arr = result.split(',');
         if (branchNum > 0) {
             for (i = branchNum; i > 0; i--) {
@@ -466,7 +458,7 @@
         }
     }
 
-    function AddEventBranch(vEventid,vBranchid) {
+    function AddEventBranch(vEventid, vBranchid) {
         $.ajax({
             url: "ajax/ajax_AuctionArea/AddEventBranch.aspx",
             data: "eventid=" + vEventid + "&branchid=" + vBranchid + "&type=AddEventBranch",
@@ -477,9 +469,6 @@
                 AlertModal("modalAlert");
                 loadDataEventAll();
             }
-
-
-
         });
     }
 
@@ -491,10 +480,10 @@
         var vLocation = $('#txtLocation').val();
 
 
-                //alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
+        //alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
         $.ajax({
             url: "ajax/ajax_AuctionArea/UpdateEvent.aspx",
-            data: "eventid=" +vEventID +"&DateStartEvent=" + vDateStartEvent + "&EventNo=" + vEventNo + "&ProductType=" + vProductType + "&Time=" + vTime + "&Location=" + vLocation + "&type=UpdateEvent",
+            data: "eventid=" + vEventID + "&DateStartEvent=" + vDateStartEvent + "&EventNo=" + vEventNo + "&ProductType=" + vProductType + "&Time=" + vTime + "&Location=" + vLocation + "&type=UpdateEvent",
             method: "POST",
             success: function (data) {
                 //alert(data)
@@ -506,97 +495,94 @@
 
     }
     function deleteBranch() {
-        
-            $.ajax({
-                url: "ajax/ajax_AuctionArea/DeleteBranchEvent.aspx",
-                data: "eventId=" + vEventID + "&type=deleteBranch",
-                method: "POST",
-                success: function (data) {
-//                    if (data.trim() == "True") {
-//                        //alert("ลบข้อมูลเรียบร้อย");
-//                        //LoadDefault(1);
-//                    } else {
-//                        alert("เกิดความผิดพลาด");
-//                    }
-                }
-            });
-        
 
-    
+        $.ajax({
+            url: "ajax/ajax_AuctionArea/DeleteBranchEvent.aspx",
+            data: "eventId=" + vEventID + "&type=deleteBranch",
+            method: "POST",
+            success: function (data) {
+                //                    if (data.trim() == "True") {
+                //                        //alert("ลบข้อมูลเรียบร้อย");
+                //                        //LoadDefault(1);
+                //                    } else {
+                //                        alert("เกิดความผิดพลาด");
+                //                    }
+            }
+        });
+
+
+
     }
-   
+
     function CancelEvent(EventID) {
-//        alert(EventID);
+        //        alert(EventID);
         $.ajax({
             url: "ajax/ajax_AuctionArea/CancelEvent.aspx",
             data: "eventId=" + EventID + "&type=CancelEvent",
             method: "POST",
             success: function (data) {
                 //alert("Success");
-                
+
             }
 
         });
     }
 
-    function getProduct(){
-    $.ajax({
-                type: "POST",
-                url: "ajax/ajax_AuctionArea/GetProductGroup.aspx",
-                contentType: "application/json; charset=utf-8",
-                data: {},
-                dataType: "json",
-                success: function (data) {
-                    var ddlCategory = $('#DropProduct')
-                    ddlCategory.empty().append('<option selected="selected" value="0">กรุณาเลือกประเภท</option>');
-                    $.each(data, function (key, value) {
-                        ddlCategory.append($("<option></option>").val(value.ID).html(value.GroupName));
-                    });
-                },
-                error: function ajaxError(result) {
-                    //alert(result.status + ":" + result.statusText);
-                }
+    function getProduct() {
+        $.ajax({
+            type: "POST",
+            url: "ajax/ajax_AuctionArea/GetProductGroup.aspx",
+            contentType: "application/json; charset=utf-8",
+            data: {},
+            dataType: "json",
+            success: function (data) {
+                var ddlCategory = $('#DropProduct')
+                ddlCategory.empty().append('<option selected="selected" value="0">กรุณาเลือกประเภท</option>');
+                $.each(data, function (key, value) {
+                    ddlCategory.append($("<option></option>").val(value.ID).html(value.GroupName));
+                });
+            },
+            error: function ajaxError(result) {
+                //alert(result.status + ":" + result.statusText);
+            }
 
-            });
-        }
+        });
+    }
+    function getDataEvent(EventID) {
 
-        
+        data = "eventId=" + EventID;
+        $.ajax({
+            type: "POST",
+            url: "ajax/ajax_AuctionArea/GetDataEventAll.aspx",
+            data: data,
+            dataType: "json",
+            success: function (data) {
+                //alert(data[0].ProductTypeID);
+                $('#txtDateEvent').val(data[0].DateEventStart);
+                $('#txtLocation').val(data[0].Location);
+                $('#txtEventNo').val(data[0].EventNo);
+                $('#DropProduct').val(data[0].ProductTypeID);
+                $('#ddlTime').val(data[0].TIME);
+            }
+        });
 
-        function getDataEvent(EventID) {
-            
-            data = "eventId=" + EventID;
-            $.ajax({
-                type: "POST",
-                url: "ajax/ajax_AuctionArea/GetDataEventAll.aspx",
-                data: data,
-                dataType: "json",
-                success: function (data) {
-                    //alert(data[0].ProductTypeID);
-                    $('#txtDateEvent').val(data[0].DateEventStart);
-                    $('#txtLocation').val(data[0].Location);
-                    $('#txtEventNo').val(data[0].EventNo);
-                    $('#DropProduct').val(data[0].ProductTypeID);
-                    $('#ddlTime').val(data[0].TIME);
-                }
-            });
-
-        }
+    }
 
 
-        function Btncancel(EventID) {
-            var vEventID = EventID;
-            AlertModal("modalConfirm");
+    function Btncancel(EventID) {
+        var vEventID = EventID;
+        AlertModal("modalConfirm");
 
-        }
+    }
 
 
 
 
 
-//    function ManageCom(EventID) {
+    //    function ManageCom(EventID) {
 
-//        //$("#ManageCommit").load("ajax/test.html");
-//    }
+    //        //$("#ManageCommit").load("ajax/test.html");
+    //    }
 
 </script>
 

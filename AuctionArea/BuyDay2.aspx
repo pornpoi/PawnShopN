@@ -18,7 +18,18 @@
     <link href="../Bootstrap/css/pagination_ys.css" rel="stylesheet" />
     <link href="../Bootstrap/css/datapicker/datepicker3.css" rel="stylesheet" />
     <link href="../Bootstrap/css/Grid.css" rel="stylesheet" />
+    <script>
+        $(function () {
+            $('#txtDateEvent').datepicker({
+                format: "dd-mm-yyyy",
+                language: "th-th",
+                autoclose: true,
+                todayHighlight: true,
+                //endDate: '0d'
+            });
+        });
 
+    </script>
 
 
 </head>
@@ -71,7 +82,7 @@
 
             </div>
         </div>
-        <div id="modalConfirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+        <%-- <div id="modalConfirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
             <div class="modal-dialog modal-lg ">
                 <div class="modal-body">
                     <div class="modal-dialog">
@@ -82,6 +93,27 @@
                         <input type='button' id="BtnCancelNO" value='ยกเลิก' style='color: #000000' class='btn btn-danger' data-dismiss="modal" />
                     </div>
                     </div>
+                </div>
+            </div>
+        </div>--%>
+        <div id="modalConfirm" class="modal fade" role="dialog" data-keyboard="false" data-backdrop="static">
+            <div class="modal-dialog modal-lg ">
+                <div class="modal-content">
+                    <form class="form-horizontal" id="comittFrm">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">ลบประกาศ</h4>
+                        </div>
+
+                        <div class=" modal-body">
+                            ต้องการปิดประกาศลงหรือไม่?
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" id="BtnCancelYES"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;ตกลง</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal" id="BtnCancelNO"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;ยกเลิก</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -100,8 +132,11 @@
                                 <td>วันที่
                                 </td>
                                 <td>
-                                    <div>
-                                        <input id="txtDateEvent" type="text" data-uk-datepicker="{format:'YYYY-MM-DD'}" class='form-control' />
+                                    <div class='input-group date' id='datetimepicker1'>
+                                        <input id="txtDateEvent" type="text" class='form-control' />
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
                                         <%--<input id="txtDateEvent" type="text" />--%>
                                     </div>
                                 </td>
@@ -187,7 +222,7 @@
                     </div>
                     <div class="modal-footer" align="right">
                         <%--<asp:Button runat="server" ID="btnConfirm" Text="ยืนยันการเพิ่มข้อมูล" class="uk-button uk-button-danger"  />--%>
-                        <input type='button' id="btnAddEvent" value='เพิ่มประกาศ' style='color: #000000' class='btn btn-primary' />
+                        <button class="btn btn-primary" id="btnAddEvent"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;เพิ่มประกาศ</button>
                         <button class="btn btn-info" id="btnUpdateEvent"><i class="fa fa-floppy-o" aria-hidden="true"></i>&nbsp;อัพเดทข้อมูล</button>
                         <%--<input type='button' id="BtnCancelA" value='ยกเลิก' style='color:#000000' class='btn btn-default' data-dismiss="modal" />--%>
                         <button id="BtnCancelA" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -211,7 +246,7 @@
     $(document).ready(function () {
 
         innerDrw(0, "branch", -1);
-        loadDataEventAll()
+        loadDataEventAll();
         getProduct();
 
     });
@@ -231,6 +266,10 @@
     $("#btnAddEvent").click(function () {
 
         AddEvent();
+        loadDataEventAll();
+        $('#modalAlert').modal('show');
+        return false;
+        //loadDataEventAll();
         //getRowBranch("TEST");
     });
 
@@ -247,18 +286,28 @@
     }
 
     $('#btnUpdateEvent').click(function () {
-        deleteBranch();
+        deleteBranch(vEventID);
         UpdateEvent();
         getRowBranch(vEventID);
         AlertModal("modalAlert");
         loadDataEventAll();
     });
 
+    function Btncancel(EventID) {
+        vEventID = EventID;
+        //AlertModal("modalConfirm");
+        $('#modalConfirm').modal('show');
+        //alert(vEventID);
+
+    }
+
+
     $("#BtnCancelYES").click(function () {
         CancelEvent(vEventID);
         deleteBranch(vEventID);
-        AlertModal("modalAlert");
+        //AlertModal("modalAlert");
         loadDataEventAll();
+        $('#modalConfirm').modal('hide');
 
     });
     $("#BtnCancelNO").click(function () {
@@ -389,20 +438,23 @@
         var vTime = $('#ddlTime').val();
         var vLocation = $('#txtLocation').val();
 
-        //        alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
+        //alert(vDateStartEvent + "-----" + vEventNo + "-----" + vProductType + "-----" + vTime);
         $.ajax({
             url: "ajax/ajax_AuctionArea/AddEvent.aspx",
             data: "DateStartEvent=" + vDateStartEvent + "&EventNo=" + vEventNo + "&ProductType=" + vProductType + "&Time=" + vTime + "&Location=" + vLocation + "&type=AddEvent",
             method: "POST",
+            async: false,
             success: function (data) {
 
                 gEventID = data;
                 //alert(gEventID);
                 getRowBranch(gEventID);
-                loadDataEventAll();
+                //$('#modalConfirm').modal('hide');
+                $('#modalAddEvent').modal('hide');
             }
 
         });
+
     }
 
     function editRow(eventId) {
@@ -466,8 +518,8 @@
             success: function (data) {
                 //alert(data)
 
-                AlertModal("modalAlert");
-                loadDataEventAll();
+                //AlertModal("modalAlert");
+
             }
         });
     }
@@ -501,12 +553,15 @@
             data: "eventId=" + vEventID + "&type=deleteBranch",
             method: "POST",
             success: function (data) {
-                //                    if (data.trim() == "True") {
-                //                        //alert("ลบข้อมูลเรียบร้อย");
-                //                        //LoadDefault(1);
-                //                    } else {
-                //                        alert("เกิดความผิดพลาด");
-                //                    }
+                if (data.trim() == "True") {
+                    //alert("ลบข้อมูลเรียบร้อย");
+                    //LoadDefault(1);
+                    $('#modalAlert').modal('show');
+
+                } else {
+                    alert("เกิดความผิดพลาด");
+                }
+
             }
         });
 
@@ -569,11 +624,7 @@
     }
 
 
-    function Btncancel(EventID) {
-        var vEventID = EventID;
-        AlertModal("modalConfirm");
 
-    }
 
 
 

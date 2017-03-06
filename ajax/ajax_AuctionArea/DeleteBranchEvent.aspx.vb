@@ -10,7 +10,8 @@ Partial Class ajax_ajax_AuctionArea_DeleteBranchEvent
         Dim type As String = Request.Form("type")
         If (type = "deleteBranch") Then
             Dim EventID As String = Request.Form("eventId")
-            DeleteBranchEvent(EventID)
+            'DeleteBranchEvent(EventID)
+            Response.Write(DeleteBranchEvent(EventID))
             'MsgBox(EventID)
         End If
 
